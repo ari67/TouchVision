@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block main-panel-content %}
+{% load static %}
+
+<!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <h2>Letter <b>C</b></h2>
+        <br>
+        <h5>With your fingertip as a wand, gently punch a twinkling dot at the canvas's top left corner.<br><br>Behold, you've brought the mystical 'A' of Braille to life—your tactile odyssey begins!</h5>
+        <br>
+        <!--<h4><em>Let's learn and play together!</em></h4>-->
+      </div>
+    </div>
+<!-- End Breadcrumbs -->
+    <section id="courses" class="courses">
+      <div class="centered-container" data-aos="fade-up" style="text-align: center;">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mx-auto">
+            <div class="course-item" style="text-align:center;">
+              <img src="static/img/C.png" class="img-fluid" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                </div>
+
+                <h3><a href="Letter_C">Letter <b>C</b></a></h3>
+
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <form class ="get-started-btn" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="image">Upload an Image:</label>
+                    <input class="custom-file-upload"type="file" accept="image"name="image"id="file" />
+                    <button class="compress_image" type="submit" id="submitBtn">
+                    Check Answer </button>
+
+              </form>
+              </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+              <div class="centered-container">
+                <div class="cenrered-elements">
+                  
+                 <h3><span class="type">{{ prediction }}</span></h3>
+                  <h4><b>{{check}}</b></h4>
+                 </div>
+               </div>
+
+          <!-- End Course Item-->
+      </div>
+  </div>
+</section>
+</main><!-- End #main -->
+
+
+
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends "index.html" %}
+{% block main-panel-content %}
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Guess the word!</h2>
+        <br>
+        <h5>Say hello to a graceful and independent friend! This furry companion loves to stretch, purr, and nap in cozy spots. Known for its agility and curious nature, it can be both a playful companion and a fierce hunter. Can you guess what it is?</h5>
+        <br>
+        <h5><em>Hint: The Word Contains 3 Letters</em>
+        <img src= "static/img/volume_icon.png" height="20px" id="volume-icon">
+        </h5>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row" align="center">
+
+          <div class="col-sm">
+            <div class="boxOne">
+
+              <form method="post" enctype="multipart/form-data" action="Cat_c">
+              <h3 class = "letter-num" style="cursor: pointer;">Letter One</h3>
+                {% csrf_token %}
+                <ul>
+                  <p>{{prediction_c}}</p>
+                </ul>
+
+                <input type="file" accept="image" name="image" id="fileOne" style="display: none;"/>
+
+
+              <div class="get-started-btn">
+                <!--form method="post" enctype="multipart/form-data" action="Ant_a"-->
+                <!--{% csrf_token %}-->
+
+                <button class="compress_image" type="submit" id="submitBtn">Check Answer</button>
+              </div>
+            </form>
+            </div>
+          </div>
+
+
+          <div class="col-sm">
+            <div class="boxTwo">
+              <form method="post" enctype="multipart/form-data" action="Cat_a">
+              <h3 class = "letter-num" style="cursor: pointer;">Letter Two</h3>
+                {% csrf_token %}
+                <ul>
+                  <p>{{prediction_a}}</p>
+                </ul>
+                <input type="file" accept="image" name="image" id="fileTwo"style="display: none;"/>
+                <div class="get-started-btn">
+                <!--form method="post" enctype="multipart/form-data" action="Ant_n"-->
+                <!--{% csrf_token %}-->
+                <button class="compress_image" type="submit" id="submitBtnTwo">Check Answer</button>
+                </div>
+              </form>
+
+            </div>
+                  
+          </div>
+
+          <div class="col-sm">
+            <div class="boxThree">
+              <form method="post" enctype="multipart/form-data" action="Cat_t">
+                <h3 class = "letter-num" style="cursor: pointer;">Letter Three</h3>
+                {% csrf_token %}
+                <ul>
+                  <p>{{prediction_t}}</p>
+                </ul>
+                <input type="file" accept="image" name="image" id="fileThree"/ style="display: none;">
+                <div class="get-started-btn">
+                <!--{% csrf_token %}-->
+
+                <button class="compress_image" type="submit" id="submitBtnThree">Check Answer</button>
+
+              </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>      
+    </section><!-- End Pricing Section -->
+    <div class="centered-container">
+      <div class="cenrered-elements">
+        <h3><span class="type">{{ final_message }}</span></h3>
+      </div>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const letterOneButton = document.querySelector(".boxOne h3");
+  const fileInput1 = document.getElementById("fileOne");
+  
+  letterOneButton.addEventListener("click", function() {
+    fileInput1.click(); // Trigger a click event on the file input
+  });
+  
+  // Optional: If you want to show the file name after selection
+  fileInput1.addEventListener("change", function() {
+    const fileName1 = this.value.split("\\").pop(); // Get the file name
+    if (fileName1) {
+      letterOneButton.textContent = `Selected: ${fileName1}`;
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const letterTwoButton = document.querySelector(".boxTwo h3");
+  const fileInput2 = document.getElementById("fileTwo");
+  
+  letterTwoButton.addEventListener("click", function() {
+    fileInput2.click(); // Trigger a click event on the file input
+  });
+  
+  // Optional: If you want to show the file name after selection
+  fileInput2.addEventListener("change", function() {
+    const fileName2 = this.value.split("\\").pop(); // Get the file name
+    if (fileName2) {
+      letterTwoButton.textContent = `Selected: ${fileName2}`;
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const letterThreeButton = document.querySelector(".boxThree h3");
+  const fileInput3 = document.getElementById("fileThree");
+  
+  letterThreeButton.addEventListener("click", function() {
+    fileInput3.click(); // Trigger a click event on the file input
+  });
+  
+  // Optional: If you want to show the file name after selection
+  fileInput3.addEventListener("change", function() {
+    const fileName3 = this.value.split("\\").pop(); // Get the file name
+    if (fileName3) {
+      letterThreeButton.textContent = `Selected: ${fileName3}`;
+    }
+  });
+});
+
+      // JavaScript code here
+      const volumeIcon = document.getElementById('volume-icon');
+      const audioDescription = new SpeechSynthesisUtterance("Say hello to a graceful and independent friend! This furry companion loves to stretch, purr, and nap in cozy spots. Known for its agility and curious nature, it can be both a playful companion and a fierce hunter. Can you guess what it is?");
+
+        window.speechSynthesis.onvoiceschanged = function() {
+            // List available voices
+            const voices = window.speechSynthesis.getVoices();
+
+            // Select your preferred voice (13th voice in the list)
+            const selectedVoice = voices[12]; // 13th voice, as arrays are zero-indexed
+
+            // Set the selected voice for the utterance
+            audioDescription.voice = selectedVoice;
+        };
+
+        volumeIcon.addEventListener('click', () => {
+            window.speechSynthesis.speak(audioDescription);
+        });
+
+</script>
+
+ {% endblock %}
